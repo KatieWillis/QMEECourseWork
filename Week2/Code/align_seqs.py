@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+"""Aligns the the two DNA sequences in the file sequences.csv"""
+__author__ = 'Katie Willis (kw1016@imperial.ac.uk)'
 
 #read in csv file and save sequences in list
 f = open('../Data/sequences.csv', 'r')
