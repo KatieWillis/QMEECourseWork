@@ -1,3 +1,7 @@
+#!/usr/bin/env python
+"""Examples of how to write for converting between for loops and list comprehensions"""
+__author__ = 'Katie Willis (kw1016@imperial.ac.uk)'
+
 ## Let's find just those taxa that are oak trees from a list of species
 
 taxa = [ 'Quercus robur',

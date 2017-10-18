@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 """Some functions demonstrating control flow"""
+__author__ = 'Katie Willis (kw1016@imperial.ac.uk)'
 
 import sys
 
@@ -47,7 +48,7 @@ def main(argv):
     print foo2(4,8)
     print foo3(4,1,7)
     print foo4(10)
-    print foo5(10)
+    print foo5(20)
     return 0
 
 

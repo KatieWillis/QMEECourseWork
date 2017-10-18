@@ -1,3 +1,7 @@
+#!/usr/bin/env python
+"""Demonstrates how to read and write files in python"""
+__author__ = 'Katie Willis (kw1016@imperial.ac.uk)'
+
 #############################
 # FILE INPUT
 #############################

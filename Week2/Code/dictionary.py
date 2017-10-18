@@ -24,9 +24,9 @@ taxa = [ ('Myotis lucifugus','Chiroptera'),
 # SAYS WHAT THE SCRIPT DOES AND WHO THE AUTHOR IS
 
 # Write your script here:
-taxa_dic = {} #Initiate an empty dictionary
-for species in taxa:
-         if species[1] in taxa_dic.keys(): #Check if the key exists
-                  taxa_dic[species[1]].add(species[0]) #add the species to the set associated with the key
+taxa_dic = {}                                                #Initiate an empty dictionary
+for species in taxa:                                         #Iterates through list
+         if species[1] in taxa_dic.keys():                   #Check if the key exists
+                  taxa_dic[species[1]].add(species[0])       #add the species to the set associated with the key
          else:
-                  taxa_dic[species[1]] = set([species[0]]) #Add a new key with the first species used to initate the set
+                  taxa_dic[species[1]] = set([species[0]])   #Add a new key with the first species used to initate the set

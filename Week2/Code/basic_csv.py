@@ -1,3 +1,7 @@
+#!/usr/bin/env python
+"""Demonstrates the use of the csv reader to read .csv files"""
+__author__ = 'Katie Willis (kw1016@imperial.ac.uk)'
+
 import csv
 # Read a file containing:
 # 'Species','Infraorder','Family','Distribution','Body mass male (Kg)'

@@ -1,10 +1,11 @@
 #!/usr/bin/env python
-"""Aligns the two sequences input as fasta files"""
+"""Aligns the two sequences input as fasta files (as command line arguments)"""
 __author__ = 'Katie Willis (kw1016@imperial.ac.uk)'
 
 import sys
 
 def extract_seq(input_fasta_file):
+    """Opens a fasta files, extracts the sequences and returns it"""
     f = open(input_fasta_file, 'r')
     data = f.readlines()
     f.close()
@@ -15,6 +16,7 @@ def extract_seq(input_fasta_file):
     return data
 
 def calculate_score(s1, s2, l1, l2, startpoint):
+    """function that computes a score by returning the number of matches starting from arbitrary startpoint"""
     # startpoint is the point at which we want to start
     matched = "" # contains string for alignement
     score = 0
@@ -30,6 +32,7 @@ def calculate_score(s1, s2, l1, l2, startpoint):
 
 
 def main(filename = "", file1 = "../Data/407228326.fasta", file2 = "../Data/407228412.fasta"):
+    """Takes in fasta file names from CL and writes a file displaying the best alignment"""
     seq1 = extract_seq(file1)
     seq2 = extract_seq(file2)
 
@@ -64,7 +67,7 @@ def main(filename = "", file1 = "../Data/407228326.fasta", file2 = "../Data/4072
 
 
     # build some formatted output and write to file
-    o = open('../Data/aligned_input_sequences.txt', 'w')
+    o = open('../Results/aligned_input_sequences.txt', 'w')
 
     line1 = "." * my_best_start_position + my_match
     line2 = "." * my_best_start_position + s2

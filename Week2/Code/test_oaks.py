@@ -1,3 +1,7 @@
+#!/usr/bin/env python
+"""Examples of how to write doctests and debugging"""
+__author__ = 'Katie Willis (kw1016@imperial.ac.uk)'
+
 import csv
 import sys
 import pdb
@@ -6,13 +10,16 @@ import doctest
 #Define function
 def is_an_oak(name):
     """ Returns True if name is starts with 'quercus'
-        >>> is_an_oak('quercus')
+        >>> is_an_oak('Quercus')
         True
 
         >>> is_an_oak('Fagus sylvatica')
         False
+
+        >>> is_an_oak('Quercuss')
+        False
     """
-    return name.lower().startswith('quercus')
+    return name.lower()==('quercus')
 
 print(is_an_oak.__doc__)
 

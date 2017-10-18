@@ -28,10 +28,10 @@ rain_lessthan_50 = [month[0] for month in rainfall if month[1] < 50]
 
 # (3) Now do (1) and (2) using conventional loops (you can choose to do
 # this before 1 and 2 !).
-rain_morethan_100 = []
-for month in rainfall:
-            if month[1] > 100:
-                        rain_morethan_100.append(month)
+rain_morethan_100 = []                                   #Initiates vector
+for month in rainfall:                                   #Iterates through list
+            if month[1] > 100:                           #Filters out months wehre rainfall > 100
+                        rain_morethan_100.append(month)  #Appends rainfall to the initiates list
 
 rain_lessthan_50 = []
 for month in rainfall:

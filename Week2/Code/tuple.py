@@ -20,6 +20,6 @@ birds = ( ('Passerculus sandwichensis','Savannah sparrow',18.7),
 # ALSO, PLEASE INCLUDE A DOCSTRING AT THE BEGINNING OF THIS FILE THAT
 # SAYS WHAT THE SCRIPT DOES AND WHO THE AUTHOR IS
 
-for bird in birds:
-          for data in bird:
-                    print data
+for bird in birds:              #Iterates through list of tuples containing individual bird information
+          for data in bird:     #Iterates through the tuple for each bird
+                    print data  #Prints information on a new line

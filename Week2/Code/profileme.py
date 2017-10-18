@@ -1,3 +1,7 @@
+#!/usr/bin/env python
+"""Functions to deomstrate the use of profiling run time"""
+__author__ = 'Katie Willis (kw1016@imperial.ac.uk)'
+
 def a_useless_function(x):
     y = 0
     # eight zeros!

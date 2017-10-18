@@ -81,4 +81,4 @@ def main(argv):
 #    sys.exit(status)
 
 
-#doctest.testmod()
+doctest.testmod()

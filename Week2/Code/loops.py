@@ -1,3 +1,7 @@
+#!/usr/bin/env python
+"""Examples of how to write loops in python"""
+__author__ = 'Katie Willis (kw1016@imperial.ac.uk)'
+
 # for loops in Python
 for i in range(5):
     print i

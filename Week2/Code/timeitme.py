@@ -1,3 +1,7 @@
+#!/usr/bin/env python
+"""Examples of how to use time it to profile run times"""
+__author__ = 'Katie Willis (kw1016@imperial.ac.uk)'
+
 ##############################################################################
 # range vs. xrange.
 ##############################################################################

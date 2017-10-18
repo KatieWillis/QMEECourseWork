@@ -18,10 +18,11 @@ mean_body_mass = [species[2] for species in birds]
 
 # (2) Now do the same using conventional loops (you can shoose to do this
 # before 1 !).
-latin_names = []                    #Initiate the empty set
-for species in birds:                  #Iterates through list of species
-          latin_names.append(species[0])  #Adds the first element of the tuple to the list
+latin_names = []                         #Initiate the empty set
+for species in birds:                    #Iterates through list of species
+          latin_names.append(species[0]) #Adds the first element of the tuple to the list
 
+#Repeat the above structure for the other pieces of information
 common_names = []
 for species in birds:
           common_names.append(species[1])
