@@ -1,0 +1,888 @@
+Starting weekly assessment for Katie, Week3
+
+Current Marks = 100
+
+Note that: 
+(1) Major sections begin with a double "====" line 
+(2) Subsections begin with a single "====" line 
+(3) Code output or text file content are printed within single "*****" lines 
+
+======================================================================
+======================================================================
+Your Git repo size this week is about 1.50 MiB on disk 
+
+PART 1: Checking project workflow...
+
+Found the following directories in parent directory: Week3, Week1, Week2, .git, Assessment
+
+Found the following files in parent directory: .Rhistory, .gitignore, README.txt
+
+Checking for key files in parent directory...
+
+Found .gitignore in parent directory, great! 
+
+Printing contents of .gitignore:
+**********************************************************************
+* ∼ 
+*.tmp
+**********************************************************************
+
+Found README in parent directory, named: README.txt
+
+Printing contents of README.txt:
+**********************************************************************
+My QMEE 2017-18 Coursework Repository
+**********************************************************************
+
+======================================================================
+Looking for the weekly directories...
+
+Found 3 weekly directories: Week1, Week2, Week3
+
+The Week3 directory will be assessed 
+
+======================================================================
+======================================================================
+PART 2: Checking weekly code and workflow...
+
+======================================================================
+Assessing WEEK3...
+
+Found the following directories: Data, Code, Results
+
+Found the following files: .Rhistory
+
+Checking for readme file in weekly directory...
+
+README file missing, 1 pt deducted
+
+Current Marks = 99
+
+Found 17 code files: control.R, apply1.R, get_TreeHeight.R, Vectorize1.R, run_get_TreeHeight.sh, apply2.R, TAutoCorr.R, try.R, sample.R, get_TreeHeight.py, TreeHeight.R, basic_io.R, break.R, browse.R, Vectorize2.R, boilerplate.R, next.R
+
+Found the following extra files: .Rhistory, .RData
+0.5 pt deducted per extra file
+
+Current Marks = 98.0
+
+======================================================================
+Testing script/code files...
+
+======================================================================
+Inspecting script file control.R...
+
+File contents are:
+**********************************************************************
+## If statement
+a <- TRUE
+if (a == TRUE){
+  print ("a is TRUE")
+} else {
+  print ("a is FALSE")
+}
+
+## On a single line
+z <- runif(1) ##random number
+if (z <= 0.25) {
+  print ("Less than a quarter")
+}
+
+## For loop using a sequence
+for (i in 1:100){
+  j <- i * i
+  print(paste(i, " squared is", j ))
+}
+
+## For loop over vector of strings
+for(species in c('Heliodoxa rubinoides',
+                 'Boissonneaua jardini',
+                 'Sula nebouxii'))
+{
+  print(paste('The species is', species))
+}
+
+## for loop using a vector
+v1 <- c("a","bc","def")
+for (i in v1){
+  print(i)
+}
+
+## While loop
+i <- 0
+while (i<100){
+  i <- i+1
+  print(i^2)
+}
+
+**********************************************************************
+
+Testing control.R...
+
+Output (only first 500 characters): 
+
+**********************************************************************
+[1] "a is TRUE"
+[1] "1  squared is 1"
+[1] "2  squared is 4"
+[1] "3  squared is 9"
+[1] "4  squared is 16"
+[1] "5  squared is 25"
+[1] "6  squared is 36"
+[1] "7  squared is 49"
+[1] "8  squared is 64"
+[1] "9  squared is 81"
+[1] "10  squared is 100"
+[1] "11  squared is 121"
+[1] "12  squared is 144"
+[1] "13  squared is 169"
+[1] "14  squared is 196"
+[1] "15  squared is 225"
+[1] "16  squared is 256"
+[1] "17  squared is 289"
+[1] "18  squared is 324"
+[1] "19  squared is 361"
+[1] "20  squared is 400"
+[1] "2
+**********************************************************************
+
+Code ran without errors
+
+Time consumed = 0.05740s
+
+======================================================================
+Inspecting script file apply1.R...
+
+File contents are:
+**********************************************************************
+## apply: applying the same function to rows/colums of a matrix
+## Build a random matrix
+M <- matrix(rnorm(100), 10, 10)
+## Take the mean of each row
+RowMeans <- apply(M, 1, mean)
+print (RowMeans)
+M## Now the variance
+RowVars <- apply(M, 1, var)
+print (RowVars)
+## By column
+ColMeans <- apply(M, 2, mean)
+print (ColMeans)
+**********************************************************************
+
+Testing apply1.R...
+
+Output (only first 500 characters): 
+
+**********************************************************************
+ [1]  0.48251082 -0.11576553 -0.29923764  0.08092382  0.27400043  0.31938091
+ [7] -0.27822449 -0.11732888 -0.28218655  0.21199030
+            [,1]       [,2]        [,3]       [,4]       [,5]       [,6]
+ [1,]  0.9131359  0.4774249 -1.30062866 -0.1517990 -0.6995309  0.6532752
+ [2,] -1.3420223  0.3346428  1.65051504  0.1646027 -1.0652703 -0.6597089
+ [3,] -0.8342840 -0.0120880 -1.81819810 -2.1218453  1.1227761 -1.5655806
+ [4,]  0.9989732 -0.3481875 -1.36156503  0.8609765  1.2418122  0.5663476
+ [5,] 
+**********************************************************************
+
+Code ran without errors
+
+Time consumed = 0.05561s
+
+======================================================================
+Inspecting script file get_TreeHeight.R...
+
+File contents are:
+**********************************************************************
+#This function calculates heights of trees from the angle of
+#elevation and the distance from the base using the trigonometric
+#formula height = distance * tan(radians)
+
+#ARGUMENTS:
+#degrees The angle of elevation
+#distance The distance from base
+
+#OUTPUT:
+#The height of the tree, same units as "distance"
+
+TreeHeight <- function(degrees, distance){
+  radians <- degrees * pi / 180
+  height <- distance * tan(radians)
+  #print(paste("Tree height is:", height))
+  return (height)
+}
+
+#Loads csv file from command line argument
+infile <- commandArgs(trailingOnly = TRUE)[1]
+MyData <- read.csv(infile, header = TRUE) # import with headers
+
+#Calculate heights
+Tree.Height.m <- TreeHeight(MyData$Angle.degrees, MyData$Distance.m)
+Output <- cbind(MyData,Tree.Height.m)
+
+
+#Writes csv file with label from command line argument
+outfile <- gsub(".csv","",infile)
+outfile <- gsub("../Data/","",outfile)
+outfile <- paste("../Results/",outfile,"_treeheights.csv",sep="")
+write.csv(Output, outfile, row.names=FALSE,quote = FALSE)
+**********************************************************************
+
+Testing get_TreeHeight.R...
+
+Output (only first 500 characters): 
+
+**********************************************************************
+
+**********************************************************************
+
+Encountered error:
+Error in file(file, "rt") : cannot open the connection
+Calls: read.csv -> read.table -> file
+In addition: Warning message:
+In file(file, "rt") : cannot open file 'NA': No such file or directory
+Execution halted
+
+======================================================================
+Inspecting script file Vectorize1.R...
+
+File contents are:
+**********************************************************************
+M <- matrix(runif(1000000),1000,1000)
+SumAllElements <- function(M){
+  Dimensions <- dim(M)
+  Tot <- 0
+  for (i in 1:Dimensions[1]){
+    for (j in 1:Dimensions[2]){
+      Tot <- Tot + M[i,j]
+    }
+  }
+  return (Tot)
+}
+## This on my computer takes about 1 sec
+print(system.time(SumAllElements(M)))
+## While this takes about 0.01 sec
+print(system.time(sum(M)))
+
+**********************************************************************
+
+Testing Vectorize1.R...
+
+Output (only first 500 characters): 
+
+**********************************************************************
+   user  system elapsed 
+  0.356   0.000   0.355 
+   user  system elapsed 
+      0       0       0 
+
+**********************************************************************
+
+Code ran without errors
+
+Time consumed = 0.47220s
+
+======================================================================
+Inspecting script file run_get_TreeHeight.sh...
+
+File contents are:
+**********************************************************************
+Rscript get_TreeHeight.R ../Data/trees.csv
+python get_TreeHeight.py ../Data/trees.csv
+**********************************************************************
+
+Testing run_get_TreeHeight.sh...
+
+Output (only first 500 characters): 
+
+**********************************************************************
+
+**********************************************************************
+
+Code ran without errors
+
+Time consumed = 0.06904s
+
+======================================================================
+Inspecting script file apply2.R...
+
+File contents are:
+**********************************************************************
+SomeOperation <- function(v){ # (What does this function do?)
+  if (sum(v) > 0){
+    return (v * 100)
+  }
+  return (v)
+}
+M <- matrix(rnorm(100), 10, 10)
+print (apply(M, 1, SomeOperation))
+**********************************************************************
+
+Testing apply2.R...
+
+Output (only first 500 characters): 
+
+**********************************************************************
+             [,1]       [,2]        [,3]      [,4]       [,5]       [,6]
+ [1,]  0.69771770   31.75253  1.55106912 128.66102 -77.458715  1.4043209
+ [2,]  0.46133452  117.80273 -0.15707458 101.06748  -3.909929 -0.8215236
+ [3,] -0.68427327  -93.17852  1.39943017  93.05013 -55.835592 -1.3430422
+ [4,] -0.24108703  160.09371 -2.88492654 137.73613 -14.845493 -0.3730105
+ [5,] -1.74711404   25.33854 -0.89281409  67.72201 -50.120010 -0.9479693
+ [6,] -0.01538515  -24.28425  0.69666806  30.55926  20.844854  
+**********************************************************************
+
+Code ran without errors
+
+Time consumed = 0.05679s
+
+======================================================================
+Inspecting script file TAutoCorr.R...
+
+File contents are:
+**********************************************************************
+load("../Data/KeyWestAnnualMeanTemperature.RData")
+
+x <- ats$Temp[1:(nrow(ats)-1)]
+y <- ats$Temp[2:nrow(ats)]
+correlation_score <- cor(x,y)
+
+Sample_distribution <-  rep(NA, 10000)
+for (i in 1:10000){
+  x_rand <- sample(x, replace = FALSE)
+  y_rand <- sample(y, replace = FALSE)
+  Sample_distribution[i] <- cor(x_rand,y_rand)
+}
+
+P_value <- sum(Sample_distribution >= correlation_score)/10000
+**********************************************************************
+
+Testing TAutoCorr.R...
+
+Output (only first 500 characters): 
+
+**********************************************************************
+
+**********************************************************************
+
+Code ran without errors
+
+Time consumed = 0.49166s
+
+======================================================================
+Inspecting script file try.R...
+
+File contents are:
+**********************************************************************
+## run a simulation that involves sampling from a population with try
+x <- rnorm(50) #Generate your population
+doit <- function(x){
+  x <- sample(x, replace = TRUE)
+  if(length(unique(x)) > 30) {#only take mean if sample was sufficient
+    print(paste("Mean of this sample was:", as.character(mean(x))))
+  }
+  else {
+    stop("Couldn't calculate mean: too few unique points!")
+  }
+}
+## Try using "try" with vectorization:
+result <- lapply(1:100, function(i) try(doit(x), FALSE))
+## Or using a for loop:
+result <- vector("list", 100) #Preallocate/Initialize
+for(i in 1:100) {
+  result[[i]] <- try(doit(x), FALSE)
+}
+**********************************************************************
+
+Testing try.R...
+
+Output (only first 500 characters): 
+
+**********************************************************************
+[1] "Mean of this sample was: 0.00654806783888869"
+[1] "Mean of this sample was: 0.0934764021386569"
+[1] "Mean of this sample was: 0.148892229702785"
+[1] "Mean of this sample was: 0.116311115942658"
+[1] "Mean of this sample was: 0.124093743650312"
+[1] "Mean of this sample was: -0.0600182677721998"
+[1] "Mean of this sample was: 0.0353864694906682"
+[1] "Mean of this sample was: 0.0427527699135714"
+[1] "Mean of this sample was: 0.0386014504634303"
+[1] "Mean of this sample was: -0.0345713129853747"
+[
+**********************************************************************
+
+Encountered error:
+Error in doit(x) : Couldn't calculate mean: too few unique points!
+Error in doit(x) : Couldn't calculate mean: too few unique points!
+Error in doit(x) : Couldn't calculate mean: too few unique points!
+Error in doit(x) : Couldn't calculate mean: too few unique points!
+Error in doit(x) : Couldn't calculate mean: too few unique points!
+Error in doit(x) : Couldn't calculate mean: too few unique points!
+Error in doit(x) : Couldn't calculate mean: too few unique points!
+Error in doit(x) : Couldn't calculate mean: too few unique points!
+Error in doit(x) : Couldn't calculate mean: too few unique points!
+Error in doit(x) : Couldn't calculate mean: too few unique points!
+Error in doit(x) : Couldn't calculate mean: too few unique points!
+Error in doit(x) : Couldn't calculate mean: too few unique points!
+Error in doit(x) : Couldn't calculate mean: too few unique points!
+Error in doit(x) : Couldn't calculate mean: too few unique points!
+Error in doit(x) : Couldn't calculate mean: too few unique points!
+Error in doit(x) : Couldn't calculate mean: too few unique points!
+Error in doit(x) : Couldn't calculate mean: too few unique points!
+Error in doit(x) : Couldn't calculate mean: too few unique points!
+Error in doit(x) : Couldn't calculate mean: too few unique points!
+Error in doit(x) : Couldn't calculate mean: too few unique points!
+Error in doit(x) : Couldn't calculate mean: too few unique points!
+Error in doit(x) : Couldn't calculate mean: too few unique points!
+Error in doit(x) : Couldn't calculate mean: too few unique points!
+Error in doit(x) : Couldn't calculate mean: too few unique points!
+Error in doit(x) : Couldn't calculate mean: too few unique points!
+Error in doit(x) : Couldn't calculate mean: too few unique points!
+Error in doit(x) : Couldn't calculate mean: too few unique points!
+Error in doit(x) : Couldn't calculate mean: too few unique points!
+Error in doit(x) : Couldn't calculate mean: too few unique points!
+Error in doit(x) : Couldn't calculate mean: too few unique points!
+Error in doit(x) : Couldn't calculate mean: too few unique points!
+Error in doit(x) : Couldn't calculate mean: too few unique points!
+Error in doit(x) : Couldn't calculate mean: too few unique points!
+Error in doit(x) : Couldn't calculate mean: too few unique points!
+Error in doit(x) : Couldn't calculate mean: too few unique points!
+Error in doit(x) : Couldn't calculate mean: too few unique points!
+Error in doit(x) : Couldn't calculate mean: too few unique points!
+Error in doit(x) : Couldn't calculate mean: too few unique points!
+Error in doit(x) : Couldn't calculate mean: too few unique points!
+Error in doit(x) : Couldn't calculate mean: too few unique points!
+Error in doit(x) : Couldn't calculate mean: too few unique points!
+Error in doit(x) : Couldn't calculate mean: too few unique points!
+Error in doit(x) : Couldn't calculate mean: too few unique points!
+Error in doit(x) : Couldn't calculate mean: too few unique points!
+Error in doit(x) : Couldn't calculate mean: too few unique points!
+Error in doit(x) : Couldn't calculate mean: too few unique points!
+Error in doit(x) : Couldn't calculate mean: too few unique points!
+Error in doit(x) : Couldn't calculate mean: too few unique points!
+Error in doit(x) : Couldn't calculate mean: too few unique points!
+Error in doit(x) : Couldn't calculate mean: too few unique points!
+Error in doit(x) : Couldn't calculate mean: too few unique points!
+Error in doit(x) : Couldn't calculate mean: too few unique points!
+Error in doit(x) : Couldn't calculate mean: too few unique points!
+Error in doit(x) : Couldn't calculate mean: too few unique points!
+Error in doit(x) : Couldn't calculate mean: too few unique points!
+
+======================================================================
+Inspecting script file sample.R...
+
+File contents are:
+**********************************************************************
+## run a simulation that involves sampling from a population
+x <- rnorm(50) #Generate your population
+doit <- function(x){
+  x <- sample(x, replace = TRUE)
+  if(length(unique(x)) > 30) { #only take mean if sample was sufficient
+    print(paste("Mean of this sample was:", as.character(mean(x))))
+  }
+}
+## Run 100 iterations using vectorization:
+result <- lapply(1:100, function(i) doit(x))
+## Or using a for loop:
+result <- vector("list", 100) #Preallocate/Initialize
+for(i in 1:100) {
+  result[[i]] <- doit(x)
+}
+**********************************************************************
+
+Testing sample.R...
+
+Output (only first 500 characters): 
+
+**********************************************************************
+[1] "Mean of this sample was: 0.0509815165337729"
+[1] "Mean of this sample was: -0.330613732346551"
+[1] "Mean of this sample was: -0.163633373812403"
+[1] "Mean of this sample was: -0.0203752577853177"
+[1] "Mean of this sample was: 0.050961517831445"
+[1] "Mean of this sample was: -0.126005254783598"
+[1] "Mean of this sample was: -0.324322029959382"
+[1] "Mean of this sample was: 0.0959214780440182"
+[1] "Mean of this sample was: -0.189928821327678"
+[1] "Mean of this sample was: -0.0935928951428754"
+
+**********************************************************************
+
+Code ran without errors
+
+Time consumed = 0.05989s
+
+======================================================================
+Inspecting script file get_TreeHeight.py...
+
+File contents are:
+**********************************************************************
+import csv
+import math
+import sys
+
+#Calculate the distance
+def TreeHeight(degrees, distance):
+    """Find x to the power of 0.5."""
+    radians = degrees*math.pi/180.0
+    distance * math.tan(radians)
+    height = distance * math.tan(radians)
+    return (height)
+
+
+#get command line arguments
+inputfile = sys.argv[1]
+outputfile = inputfile.replace('.csv', '')
+outputfile = outputfile.replace('../Data/', '')
+outputfile = "../Results/" + outputfile + "_treeheights_python.csv"
+
+#Read in file
+f = open(inputfile,'rb')
+csvread = csv.reader(f)
+header = next(csvread)
+
+
+#prepare write file
+g = open(outputfile,'wb')
+csvwrite = csv.writer(g)
+
+#calculate height and write output to file
+csvwrite.writerow(header + ["Tree.Height.m"])
+for row in csvread:
+    tree_height = TreeHeight(float(row[2]),float(row[1]))
+    csvwrite.writerow(row + [str(tree_height)])
+
+f.close()
+g.close()
+**********************************************************************
+
+Testing get_TreeHeight.py...
+
+get_TreeHeight.py is a Python script file;
+ checking for docstrings...
+
+Found one or more doctrings!
+
+Output (only first 500 characters): 
+
+**********************************************************************
+
+**********************************************************************
+
+Encountered error:
+Traceback (most recent call last):
+  File "get_TreeHeight.py", line 15, in <module>
+    inputfile = sys.argv[1]
+IndexError: list index out of range
+
+======================================================================
+Inspecting script file TreeHeight.R...
+
+File contents are:
+**********************************************************************
+#This function calculates heights of trees from the angle of
+#elevation and the distance from the base using the trigonometric
+#formula height = distance * tan(radians)
+
+#ARGUMENTS:
+#degrees The angle of elevation
+#distance The distance from base
+
+#OUTPUT:
+#The height of the tree, same units as "distance"
+
+TreeHeight <- function(degrees, distance){
+  radians <- degrees * pi / 180
+  height <- distance * tan(radians)
+  #print(paste("Tree height is:", height))
+  return (height)
+}
+
+#Loads csv file
+MyData <- read.csv("../Data/trees.csv", header = TRUE) # import with headers
+
+#Calculate heights
+Tree.Height.m <- TreeHeight(MyData$Angle.degrees, MyData$Distance.m)
+Output <- cbind(MyData,Tree.Height.m)
+
+
+#Writes csv file
+write.csv(Output, "../Results/TreeHts.csv", row.names=FALSE)
+**********************************************************************
+
+Testing TreeHeight.R...
+
+Output (only first 500 characters): 
+
+**********************************************************************
+
+**********************************************************************
+
+Code ran without errors
+
+Time consumed = 0.06019s
+
+======================================================================
+Inspecting script file basic_io.R...
+
+File contents are:
+**********************************************************************
+#A simple R script to illustrate R input-output.
+# Run line by line and check inputs outputs to understand what is
+# happening
+MyData <- read.csv("../Data/trees.csv", header = TRUE) # import with headers
+write.csv(MyData, "../Results/MyData.csv") #write it out as a new file
+write.table(MyData[1,], file = "../Results/MyData.csv",append=TRUE,col.names=FALSE) # Append to it
+write.csv(MyData, "../Results/MyData.csv", row.names=TRUE) # write row names
+write.table(MyData, "../Results/MyData.csv", col.names=FALSE) # ignore column names
+**********************************************************************
+
+Testing basic_io.R...
+
+Output (only first 500 characters): 
+
+**********************************************************************
+
+**********************************************************************
+
+Code ran without errors
+
+Time consumed = 0.06175s
+
+======================================================================
+Inspecting script file break.R...
+
+File contents are:
+**********************************************************************
+i <- 0 #Initialize i
+while(i < Inf) {
+  if (i == 20) {
+    break } # Break out of the while loop!
+  else {
+    cat("i equals " , i , " \n")
+    i <- i + 1 # Update i
+  }
+}
+**********************************************************************
+
+Testing break.R...
+
+Output (only first 500 characters): 
+
+**********************************************************************
+i equals  0  
+i equals  1  
+i equals  2  
+i equals  3  
+i equals  4  
+i equals  5  
+i equals  6  
+i equals  7  
+i equals  8  
+i equals  9  
+i equals  10  
+i equals  11  
+i equals  12  
+i equals  13  
+i equals  14  
+i equals  15  
+i equals  16  
+i equals  17  
+i equals  18  
+i equals  19  
+
+**********************************************************************
+
+Code ran without errors
+
+Time consumed = 0.05651s
+
+======================================================================
+Inspecting script file browse.R...
+
+File contents are:
+**********************************************************************
+Exponential <- function(N0 = 1, r = 1, generations = 10){
+  # Runs a simulation of exponential growth
+  # Returns a vector of length generations
+  N <- rep(NA, generations)
+  # Creates a vector of NA
+  N[1] <- N0
+  for (t in 2:generations){
+    N[t] <- N[t-1] * exp(r)
+    #
+    browser()
+  }
+  return (N)
+}
+plot(Exponential(), type="l", main="Exponential growth")
+**********************************************************************
+
+Testing browse.R...
+
+Output (only first 500 characters): 
+
+**********************************************************************
+Called from: Exponential()
+debug: N[t] <- N[t - 1] * exp(r)
+debug: browser()
+debug: N[t] <- N[t - 1] * exp(r)
+debug: browser()
+debug: N[t] <- N[t - 1] * exp(r)
+debug: browser()
+debug: N[t] <- N[t - 1] * exp(r)
+debug: browser()
+debug: N[t] <- N[t - 1] * exp(r)
+debug: browser()
+debug: N[t] <- N[t - 1] * exp(r)
+debug: browser()
+debug: N[t] <- N[t - 1] * exp(r)
+debug: browser()
+debug: N[t] <- N[t - 1] * exp(r)
+debug: browser()
+
+**********************************************************************
+
+Code ran without errors
+
+Time consumed = 0.08652s
+
+======================================================================
+Inspecting script file Vectorize2.R...
+
+File contents are:
+**********************************************************************
+# Runs the stochastic (with gaussian fluctuations) Ricker Eqn .
+
+rm(list=ls())
+
+stochrick<-function(p0=runif(1000,.5,1.5),r=1.2,K=1,sigma=0.2,numyears=100){
+  #initialize
+  N<-matrix(NA,numyears,length(p0))
+  N[1,]<-p0
+  
+  for (pop in 1:length(p0)) #loop through the populations
+  {
+    for (yr in 2:numyears) #for each pop, loop through the years
+    {
+      N[yr,pop]<-N[yr-1,pop]*exp(r*(1-N[yr-1,pop]/K)+rnorm(1,0,sigma))
+    }
+  }
+  return(N)
+}
+  
+  # Now write another code called stochrickvect that vectorizes the above 
+  # to the extent possible, with improved performance: 
+
+stochrickvect <- function(p0=runif(1000,.5,1.5),r=1.2,K=1,sigma=0.2,numyears=100){
+  #initialize
+  N<-matrix(NA,numyears,length(p0))
+  N[1,]<-p0
+  
+  #loop through the populations
+  for (yr in 2:numyears){
+    N[yr,]<-N[yr-1,]*exp(r*(1-N[yr-1,]/K)+rnorm(1,0,sigma))
+  }
+  
+  return(N)
+}
+
+Data = stochrickvect()
+plot(1:100,Data[,1])
+#print("Stochastic Ricker takes:")
+#print(system.time(res2<-stochrick()))
+
+print("Vectorized Stochastic Ricker takes:")
+print(system.time(res2<-stochrickvect()))
+  
+  **********************************************************************
+
+Testing Vectorize2.R...
+
+Output (only first 500 characters): 
+
+**********************************************************************
+[1] "Vectorized Stochastic Ricker takes:"
+   user  system elapsed 
+  0.004   0.000   0.005 
+
+**********************************************************************
+
+Code ran without errors
+
+Time consumed = 0.11190s
+
+======================================================================
+Inspecting script file boilerplate.R...
+
+File contents are:
+**********************************************************************
+MyFunction <- function(Arg1, Arg2){
+  # Statements involving Arg1, Arg2:
+  print(paste("Argument", as.character(Arg1), "is a", class(Arg1))) # print Arg1's type
+  print(paste("Argument", as.character(Arg2), "is a", class(Arg2))) # print Arg2's type
+  return (c(Arg1, Arg2)) #this is optional, but very useful
+}
+MyFunction(1,2) #test the function
+MyFunction("Riki","Tiki") #A different test**********************************************************************
+
+Testing boilerplate.R...
+
+Output (only first 500 characters): 
+
+**********************************************************************
+[1] "Argument 1 is a numeric"
+[1] "Argument 2 is a numeric"
+[1] 1 2
+[1] "Argument Riki is a character"
+[1] "Argument Tiki is a character"
+[1] "Riki" "Tiki"
+
+**********************************************************************
+
+Code ran without errors
+
+Time consumed = 0.05453s
+
+======================================================================
+Inspecting script file next.R...
+
+File contents are:
+**********************************************************************
+for (i in 1:10) {
+  if ((i %% 2) == 0)
+    next # pass to next iteration of loop
+  print(i)
+}
+**********************************************************************
+
+Testing next.R...
+
+Output (only first 500 characters): 
+
+**********************************************************************
+[1] 1
+[1] 3
+[1] 5
+[1] 7
+[1] 9
+
+**********************************************************************
+
+Code ran without errors
+
+Time consumed = 0.05423s
+
+======================================================================
+======================================================================
+Finished running scripts
+
+Ran into 3 errors
+
+======================================================================
+======================================================================
+
+FINISHED WEEKLY ASSESSMENT
+
+Current Marks for the Week = 98.0
+
+NOTE THAT THESE ARE NOT THE FINAL MARKS FOR THE WEEK, BUT AN UPPER BOUND ON THE MARKS!
